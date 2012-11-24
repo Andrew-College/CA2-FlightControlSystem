@@ -13,14 +13,14 @@ public class Plane {
 
     
 
-    public Plane(String name, int serial, int fuel, int passengers, int year, int month, int day, int hour, int min) {
+    public Plane(String name, int serial, int fuel, int passengers, int year, int month, int day, int hour) {
         count++;
         this.name = name;
         this.serial = count;
         this.fuel = fuel;
         this.passengers = passengers;
         this.arrivalTime = Calendar.getInstance();
-        this.arrivalTime.set(year, month, day, hour, min);
+        this.arrivalTime.set(year, month, day, hour,0);
     }
 
     public String getName() {
@@ -59,8 +59,8 @@ public class Plane {
         return arrivalTime;
     }
 
-    public void setArrivalTime(int year, int month, int day, int hour, int min) {
-        this.arrivalTime.set(year, month, day, hour, min);
+    public void setArrivalTime(int year, int month, int day, int hour) {
+        this.arrivalTime.set(year, month, day, hour, 0);
     }
     
     

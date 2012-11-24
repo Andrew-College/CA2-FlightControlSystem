@@ -6,11 +6,11 @@ import java.util.Map;
 public class MainApp 
 {
 	private HashMap<String, Vehicle> vehicleMap;
-	public static void main(String[] args) 
-	{
-		MainApp app = new MainApp();
-		app.start();
-	}
+//	public static void main(String[] args) 
+//	{
+//		MainApp app = new MainApp();
+//		app.start();
+//	}
 	public void start()
 	{
 		this.vehicleMap = new HashMap<String, Vehicle>();
