@@ -13,7 +13,7 @@ public class Plane {
 
     
 
-    public Plane(String name, int serial, int fuel, int passengers, int year, int month, int day, int hour) {
+    public Plane(String name, int fuel, int passengers, int year, int month, int day, int hour) {
         count++;
         this.name = name;
         this.serial = count;

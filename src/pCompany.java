@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 
 
-public class PCompany {
+public class PCompany{
     
  private String name;
  private int numPlanes;
@@ -22,6 +22,31 @@ public class PCompany {
     public void editPlane(Plane p){
         
     }
+
+    public ArrayList<Plane> getPlanes() {
+        return Planes;
+    }
+
+    public void addPlanes(Plane p) {
+        this.Planes.add(p);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getNumPlanes() {
+        return numPlanes;
+    }
+
+    public void setNumPlanes(int numPlanes) {
+        this.numPlanes = numPlanes;
+    }
  
+    
     
 }
