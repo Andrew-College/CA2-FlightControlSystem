@@ -8,19 +8,35 @@ public class Plane {
     private int count;
     private int serial;
     private int fuel;
+    private int fuelConsumption;
+    private int timeLimitBeforeLand;
     private int passengers;
     private Calendar arrivalTime;
+    private Calendar departTime;
 
-    
-
-    public Plane(String name, int fuel, int passengers, int year, int month, int day, int hour) {
-        count++;
+    public Plane(String name, int fuel, int fuelConsumption, int passengers) {
         this.name = name;
         this.serial = count;
         this.fuel = fuel;
+        this.fuelConsumption = fuelConsumption;
+
         this.passengers = passengers;
         this.arrivalTime = Calendar.getInstance();
-        this.arrivalTime.set(year, month, day, hour,0);
+        this.departTime = Calendar.getInstance();
+        this.timeLimitBeforeLand = gettimeLimitBeforeLand();
+
+    }
+
+    public Plane(String name, int fuel, int fuelConsumption, int passengers, int year, int month, int day, int hour) {
+
+        this.name = name;
+        this.serial = count;
+        this.fuel = fuel;
+        this.fuelConsumption = fuelConsumption;
+        this.timeLimitBeforeLand = gettimeLimitBeforeLand();
+        this.passengers = passengers;
+        this.arrivalTime = Calendar.getInstance();
+        this.arrivalTime.set(year, month, day, hour, 0);
     }
 
     public String getName() {
@@ -39,12 +55,20 @@ public class Plane {
         this.serial = serial;
     }
 
-    public int getFuel() {
-        return fuel;
+    public int gettimeLimitBeforeLand() {
+
+        int count = 0;
+        int result = this.fuel;
+        while (result >= 0) {
+            count++;
+            result -= this.fuelConsumption;
+        }
+        
+        return count * 60;
     }
 
-    public void setFuel(int fuel) {
-        this.fuel = fuel;
+    public void settimeLimitBeforeLand(int timeLimitBeforeLand) {
+        this.timeLimitBeforeLand = timeLimitBeforeLand;
     }
 
     public int getPassengers() {
@@ -62,6 +86,4 @@ public class Plane {
     public void setArrivalTime(int year, int month, int day, int hour) {
         this.arrivalTime.set(year, month, day, hour, 0);
     }
-    
-    
 }
