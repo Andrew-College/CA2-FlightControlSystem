@@ -1,15 +1,16 @@
 
 import java.lang.Math;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class mainApp {
 
     public static void main(String[] args) {
+        mainApp app = new mainApp();
+
         HashMap<String, PCompany> companyList = new HashMap<String, PCompany>();
-        
-        int incomingPlanes = 0;
-        
+
         PCompany qatar = new PCompany("Qatar");
         PCompany AerLingus = new PCompany("AerLingus");
 
@@ -23,8 +24,9 @@ public class mainApp {
 
 
         /*
-         * Project euler long[] a = {0,1,0}; long result = 0; while(a[0] <
-         * 4000000){
+         * Project euler 
+         * long[] a = {0,1,0}; long result = 0; 
+         * while(a[0] < * 4000000){
          *
          * System.out.println(a[0]); a[2] = a[0] + a[1]; a[0] = a[1]; a[1] =
          * a[2]; System.out.println(a[0]); if(a[1]%2==0){
@@ -36,11 +38,17 @@ public class mainApp {
          * }
          * System.out.print(result);
          */
-        
-        mainApp app = new mainApp();
-        app.incomingWork();
+
+
+        app.incomingWork(companyList);
     }
-    public static void incomingWork(){
+
+    public static void incomingWork(HashMap<String, PCompany> cList) {
+        
+        LinkedList<Plane> planeQueue = new LinkedList<Plane>();
+        int incomingPlanes = planeQueue.size();
+        
+        
         
     }
 }

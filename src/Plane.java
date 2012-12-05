@@ -67,10 +67,6 @@ public class Plane {
         return count * 60;
     }
 
-    public void settimeLimitBeforeLand(int timeLimitBeforeLand) {
-        this.timeLimitBeforeLand = timeLimitBeforeLand;
-    }
-
     public int getPassengers() {
         return passengers;
     }
