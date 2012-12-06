@@ -2,6 +2,7 @@
 import java.lang.Math;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class mainApp {
 
@@ -40,7 +41,8 @@ public class mainApp {
         mainApp app = new mainApp();
         app.incomingWork();
     }
-    public static void incomingWork(){
-        
+    public void incomingWork(){
+        TreeMap<Integer,Plane> incomingPlanes = new TreeMap<Integer,Plane>();
+        //adds a plane and checks if it exists, if so, remove this new plane and return the found plane
     }
 }
