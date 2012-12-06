@@ -9,17 +9,15 @@ public class mainApp {
     public static void main(String[] args) {
         mainApp app = new mainApp();
 
-        HashMap<String, PCompany> companyList = new HashMap<String, PCompany>();
+        HashMap<String, Plane> companyList = new HashMap<String, Plane>();
 
-        PCompany qatar = new PCompany("Qatar");
-        PCompany AerLingus = new PCompany("AerLingus");
 
         //Add known planes/companies up here
 
-        qatar.addPlane(new Plane("shortTripV45", 3000, 100, 20));
-        AerLingus.addPlane(new Plane("AerDrop212", 2000, 50, 20));
-        companyList.put(qatar.getName(), qatar);
-        companyList.put(AerLingus.getName(), AerLingus);
+        Plane shortTripV45 = new Plane("shortTripV45", 3000, "Dead Air", 100, 20);
+        Plane AerDrop212 = new Plane("AerDrop212", 2000, "JK Airtrains", 50, 20);
+        companyList.put(shortTripV45.getName(), shortTripV45);
+        companyList.put(AerDrop212.getName(), AerDrop212);
 
 
 
@@ -43,7 +41,7 @@ public class mainApp {
         app.incomingWork(companyList);
     }
 
-    public static void incomingWork(HashMap<String, PCompany> cList) {
+    public static void incomingWork(HashMap<String, Plane> cList) {
         
         LinkedList<Plane> planeQueue = new LinkedList<Plane>();
         int incomingPlanes = planeQueue.size();

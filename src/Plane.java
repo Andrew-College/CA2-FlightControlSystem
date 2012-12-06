@@ -7,6 +7,7 @@ public class Plane {
     private String name;
     private int count;
     private int serial;
+    private String pCompany;
     private int fuel;
     private int fuelConsumption;
     private int timeLimitBeforeLand;
@@ -14,10 +15,11 @@ public class Plane {
     private Calendar arrivalTime;
     private Calendar departTime;
 
-    public Plane(String name, int fuel, int fuelConsumption, int passengers) {
+    public Plane(String name, int fuel, String pCompany, int fuelConsumption, int passengers) {
         this.name = name;
         this.serial = count;
         this.fuel = fuel;
+        this.pCompany = pCompany;
         this.fuelConsumption = fuelConsumption;
 
         this.passengers = passengers;
@@ -27,11 +29,12 @@ public class Plane {
 
     }
 
-    public Plane(String name, int fuel, int fuelConsumption, int passengers, int year, int month, int day, int hour) {
+    public Plane(String name, int fuel, String pCompany, int fuelConsumption, int passengers, int year, int month, int day, int hour) {
 
         this.name = name;
         this.serial = count;
         this.fuel = fuel;
+        this.pCompany = pCompany;
         this.fuelConsumption = fuelConsumption;
         this.timeLimitBeforeLand = gettimeLimitBeforeLand();
         this.passengers = passengers;
@@ -54,6 +57,20 @@ public class Plane {
     public void setSerial(int serial) {
         this.serial = serial;
     }
+
+    public String getpCompany() {
+        return pCompany;
+    }
+
+    public void setpCompany(String pCompany) {
+        this.pCompany = pCompany;
+    }
+    
+
+    public void setFuelConsumption(int fuelConsumption) {
+        this.fuelConsumption = fuelConsumption;
+    }
+    
 
     public int gettimeLimitBeforeLand() {
 
@@ -83,3 +100,6 @@ public class Plane {
         this.arrivalTime.set(year, month, day, hour, 0);
     }
 }
+
+
+//CompareTo method to be done here. (Compares the remaining fuel left for the treemap?)
