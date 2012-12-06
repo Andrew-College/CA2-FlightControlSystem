@@ -23,9 +23,8 @@ public class mainApp {
 
 
         /*
-         * Project euler 
-         * long[] a = {0,1,0}; long result = 0; 
-         * while(a[0] < * 4000000){
+         * Project euler long[] a = {0,1,0}; long result = 0; while(a[0] < *
+         * 4000000){
          *
          * System.out.println(a[0]); a[2] = a[0] + a[1]; a[0] = a[1]; a[1] =
          * a[2]; System.out.println(a[0]); if(a[1]%2==0){
@@ -41,19 +40,40 @@ public class mainApp {
 
         app.incomingWork(companyList);
     }
-<<<<<<< HEAD
 
-    public static void incomingWork(HashMap<String, Plane> cList) {
-        
-        LinkedList<Plane> planeQueue = new LinkedList<Plane>();
-        int incomingPlanes = planeQueue.size();
-        
-        
-        
-=======
-    public void incomingWork(){
-        TreeMap<Integer,Plane> incomingPlanes = new TreeMap<Integer,Plane>();
-        //adds a plane and checks if it exists, if so, remove this new plane and return the found plane
->>>>>>> origin/AndrewCode
+    public void incomingWork(HashMap<String, Plane> cList) {
+        TreeMap<Integer, Plane> incomingPlanes = new TreeMap<Integer, Plane>();
+
+
+        //adds a plane and checks if it exists, if so, remove this adjust plane with the found plane
+
+        Plane p1 = addPlane("AerDrop212", 2000, "JK Airtrains", 50, 12, 2012, 12, 25, 12, cList);
+        incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
+
+        p1 = addPlane("shortTripV456", 5000, "JK Airtrains1", 50, 12, 2012, 12, 25, 13, cList);
+        incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
+
+        p1 = addPlane("shortTripV45", 3000, "Dead Air", 100, 20, 2012, 12, 25, 13, cList);
+        incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
+
+        ///////////////////////////////////////////////////////////////
+
+        for (Plane p : cList.values()) {
+            System.out.println(p.toString());
+        }
+    }
+
+    public Plane addPlane(String name, int fuel, String pCompany, int fuelConsumption, int passengers, int year, int month, int day, int hour, HashMap<String, Plane> rList) {
+
+        Plane p1 = new Plane(name, fuel, pCompany, fuelConsumption, passengers, year, month, day, hour);
+
+        for (Plane t : rList.values()) {
+            if (t.getName().equalsIgnoreCase(p1.getName()) && t.getpCompany().equalsIgnoreCase(p1.getpCompany())) {
+                p1.setSerial(t.getSerial());
+                t.decNumPlanes();
+                break;
+            }
+        }
+        return p1;
     }
 }
