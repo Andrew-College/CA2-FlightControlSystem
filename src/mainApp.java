@@ -3,6 +3,7 @@ import java.lang.Math;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class mainApp {
 
@@ -40,6 +41,7 @@ public class mainApp {
 
         app.incomingWork(companyList);
     }
+<<<<<<< HEAD
 
     public static void incomingWork(HashMap<String, Plane> cList) {
         
@@ -48,5 +50,10 @@ public class mainApp {
         
         
         
+=======
+    public void incomingWork(){
+        TreeMap<Integer,Plane> incomingPlanes = new TreeMap<Integer,Plane>();
+        //adds a plane and checks if it exists, if so, remove this new plane and return the found plane
+>>>>>>> origin/AndrewCode
     }
 }

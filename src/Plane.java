@@ -26,7 +26,8 @@ public class Plane {
         this.arrivalTime = Calendar.getInstance();
         this.departTime = Calendar.getInstance();
         this.timeLimitBeforeLand = gettimeLimitBeforeLand();
-
+        
+        count++;
     }
 
     public Plane(String name, int fuel, String pCompany, int fuelConsumption, int passengers, int year, int month, int day, int hour) {
@@ -40,6 +41,11 @@ public class Plane {
         this.passengers = passengers;
         this.arrivalTime = Calendar.getInstance();
         this.arrivalTime.set(year, month, day, hour, 0);
+        count++;
+    }
+    
+    public void decCount(){
+        count--;
     }
 
     public String getName() {
@@ -74,14 +80,14 @@ public class Plane {
 
     public int gettimeLimitBeforeLand() {
 
-        int count = 0;
+        int left = 0;
         int result = this.fuel;
         while (result >= 0) {
-            count++;
+            left++;
             result -= this.fuelConsumption;
         }
         
-        return count * 60;
+        return left * 60;
     }
 
     public int getPassengers() {
