@@ -50,10 +50,17 @@ public class mainApp {
         Plane p1 = addPlane("AerDrop212", 2000, "JK Airtrains", 50, 12, 2012, 12, 25, 12, cList);
         incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
 
+<<<<<<< HEAD
         p1 = addPlane("shortTripV456", 5000, "JK Airtrains1", 50, 12, 2012, 12, 25, 13, cList);
         incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
 
         p1 = addPlane("shortTripV45", 3000, "Dead Air", 100, 20, 2012, 12, 25, 13, cList);
+=======
+        p1 = addPlane("shortTripV456", 5000, "JK Airtrains1", 200, 3, 2012, 12, 25, 13, cList);
+        incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
+
+        p1 = addPlane("shortTripV45", 3000, "Dead Air", 100, 20, 2012, 12, 25, 14, cList);
+>>>>>>> AndrewCode
         incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
 
         ///////////////////////////////////////////////////////////////
