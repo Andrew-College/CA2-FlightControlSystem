@@ -1,8 +1,11 @@
+package Testing;
+
+
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class Plane implements Comparable {
+public class testPlane implements Comparable {
 
     private String name;
     private int NumPlanes;
@@ -15,7 +18,7 @@ public class Plane implements Comparable {
     private Calendar arrivalTime;
     private Calendar departTime;
 
-    public Plane(String name, int fuel, String pCompany, int fuelConsumption, int passengers) {
+    public testPlane(String name, int fuel, String pCompany, int fuelConsumption, int passengers) {
         this.name = name;
         this.serial = NumPlanes;
         this.fuel = fuel;
@@ -29,7 +32,7 @@ public class Plane implements Comparable {
         NumPlanes++;
     }
 
-    public Plane(String name, int fuel, String pCompany, int fuelConsumption, int passengers, int year, int month, int day, int hour) {
+    public testPlane(String name, int fuel, String pCompany, int fuelConsumption, int passengers, int year, int month, int day, int hour) {
         this.name = name;
         this.serial = NumPlanes;
         this.fuel = fuel;
@@ -112,7 +115,7 @@ public class Plane implements Comparable {
     @Override
     public int compareTo(Object o) {
 
-        Plane p = (Plane) (o);
+        testPlane p = (testPlane) (o);
         Integer p1 = (Integer) this.gettimeLimitBeforeLand();
 
         return p1.compareTo(p.gettimeLimitBeforeLand());
