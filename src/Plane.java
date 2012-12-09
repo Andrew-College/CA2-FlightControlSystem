@@ -5,7 +5,7 @@ import java.util.Date;
 public class Plane implements Comparable {
 
     private String name;
-    private int NumPlanes;
+    private int NumPlanes = 0;
     private int serial;
     private String pCompany;
     private int fuel;
@@ -14,6 +14,7 @@ public class Plane implements Comparable {
     private int passengers;
     private Calendar arrivalTime;
     private Calendar departTime;
+    private boolean isLanded;
 
     public Plane(String name, int fuel, String pCompany, int fuelConsumption, int passengers) {
         this.name = name;
@@ -21,6 +22,7 @@ public class Plane implements Comparable {
         this.fuel = fuel;
         this.pCompany = pCompany;
         this.fuelConsumption = fuelConsumption;
+        this.isLanded = false;
 
         this.passengers = passengers;
         this.arrivalTime = Calendar.getInstance();
@@ -39,6 +41,7 @@ public class Plane implements Comparable {
         this.passengers = passengers;
         this.arrivalTime = Calendar.getInstance();
         this.arrivalTime.set(year, month, day, hour, 0);
+        this.isLanded = false;
         NumPlanes++;
     }
 
@@ -74,7 +77,7 @@ public class Plane implements Comparable {
         this.fuelConsumption = fuelConsumption;
     }
 
-    public final int gettimeLimitBeforeLand() {
+    public int gettimeLimitBeforeLand() {
 
         int left = 0;
         int result = this.fuel;
@@ -94,9 +97,20 @@ public class Plane implements Comparable {
         this.passengers = passengers;
     }
 
+    public boolean isIsLanded() {
+        return isLanded;
+    }
+
+    public void setIsLanded(boolean isLanded) {
+        this.isLanded = isLanded;
+    }
+
+    
+    
     public Calendar getArrivalTime() {
         return arrivalTime;
     }
+    
 
     public void setArrivalTime(int year, int month, int day, int hour) {
         this.arrivalTime.set(year, month, day, hour, 0);
@@ -116,6 +130,12 @@ public class Plane implements Comparable {
         Integer p1 = (Integer) this.gettimeLimitBeforeLand();
 
         return p1.compareTo(p.gettimeLimitBeforeLand());
+    }
+    
+    public int isOverdue()
+    {
+        
+            return 1;
     }
     
     
