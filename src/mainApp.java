@@ -1,9 +1,6 @@
 
 import java.lang.Math;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class mainApp {
 
@@ -50,31 +47,28 @@ public class mainApp {
         Plane p1 = addPlane("AerDrop212", 2000, "JK Airtrains", 50, 12, 2012, 12, 25, 12, cList);
         incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
 
-<<<<<<< HEAD
-        p1 = addPlane("shortTripV456", 5000, "JK Airtrains1", 200, 3, 2012, 12, 25, 13, cList);
+
+        p1 = addPlane("shortTripV456", 5000, "JK Airtrains", 200, 3, 2012, 12, 25, 13, cList);
+        incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
+
+
+        p1 = addPlane("shortTripV456", 5000, "JK Airtrains", 50, 12, 2012, 12, 25, 13, cList);
+        incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
+
+
+        p1 = addPlane("shortTripV456", 5000, "JK Airtrains", 200, 3, 2012, 12, 25, 13, cList);
         incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
 
         p1 = addPlane("shortTripV45", 3000, "Dead Air", 100, 20, 2012, 12, 25, 14, cList);
-=======
-<<<<<<< HEAD
-        p1 = addPlane("shortTripV456", 5000, "JK Airtrains1", 50, 12, 2012, 12, 25, 13, cList);
         incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
 
-        p1 = addPlane("shortTripV45", 3000, "Dead Air", 100, 20, 2012, 12, 25, 13, cList);
-=======
-        p1 = addPlane("shortTripV456", 5000, "JK Airtrains1", 200, 3, 2012, 12, 25, 13, cList);
-        incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
-
-        p1 = addPlane("shortTripV45", 3000, "Dead Air", 100, 20, 2012, 12, 25, 14, cList);
->>>>>>> AndrewCode
->>>>>>> 372dacdcd5111645d7ce7c23f14dfe47640d42d0
-        incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
-
-        ///////////////////////////////////////////////////////////////
-
-        for (Plane p : cList.values()) {
+        for (Plane p : incomingPlanes.values()) {
             System.out.println(p.toString());
         }
+
+        System.out.println("///////////////////////////////////////////////////////////////");
+
+        pDetails(4, incomingPlanes, "JK Airtrains");
     }
 
     public Plane addPlane(String name, int fuel, String pCompany, int fuelConsumption, int passengers, int year, int month, int day, int hour, HashMap<String, Plane> rList) {
@@ -89,5 +83,42 @@ public class mainApp {
             }
         }
         return p1;
+    }
+
+    public void pDetails(int type, TreeMap<Integer, Plane> planeList, String compName) {
+
+        ArrayList<Integer> openInt = new ArrayList<Integer>();
+        openInt.add(0);
+        String openString = "";
+        
+        for (Plane p : planeList.values()) {
+            switch (type) {
+                case 1://all planes, one airline
+                    System.out.print((p.getpCompany().equalsIgnoreCase(compName)) ? p.toString() + "\n" : "");
+                    break;
+                case 2://all planes passengers
+                    openInt.set(0, openInt.get(0)+p.getPassengers());
+                    openString = "There are " + openInt + " passengers in the air.";
+                    break;
+                case 3://next plane for one airline
+                    if (openInt.get(0) != 1 && p.getpCompany().equalsIgnoreCase(compName)) {
+                        openString = p.toString();
+                        openInt.set(0, openInt.get(0)+1);
+                    }
+                    break;
+                case 4://amount of planes in an airline 
+                    
+                    if (p.getpCompany().equalsIgnoreCase(compName)) {
+                        openInt.set(0, openInt.get(0)+1);
+                        openString = compName + " has " + openInt.get(0) + " planes in the air.";
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (openString.length() > 0) {
+            System.out.println(openString);
+        }
     }
 }
