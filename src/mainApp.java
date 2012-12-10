@@ -68,7 +68,7 @@ public class mainApp {
 
         System.out.println("///////////////////////////////////////////////////////////////");
 
-        pDetails(4, incomingPlanes, "JK Airtrains");
+        pDetails(3, incomingPlanes, "JK Airtrains");
     }
 
     public Plane addPlane(String name, int fuel, String pCompany, int fuelConsumption, int passengers, int year, int month, int day, int hour, HashMap<String, Plane> rList) {
@@ -90,29 +90,42 @@ public class mainApp {
         ArrayList<Integer> openInt = new ArrayList<Integer>();
         openInt.add(0);
         String openString = "";
-        
+        planeCheck:
         for (Plane p : planeList.values()) {
             switch (type) {
                 case 1://all planes, one airline
                     System.out.print((p.getpCompany().equalsIgnoreCase(compName)) ? p.toString() + "\n" : "");
                     break;
                 case 2://all planes passengers
-                    openInt.set(0, openInt.get(0)+p.getPassengers());
+                    openInt.set(0, openInt.get(0) + p.getPassengers());
                     openString = "There are " + openInt + " passengers in the air.";
                     break;
                 case 3://next plane for one airline
                     if (openInt.get(0) != 1 && p.getpCompany().equalsIgnoreCase(compName)) {
                         openString = p.toString();
-                        openInt.set(0, openInt.get(0)+1);
+                        //openInt.set(0, openInt.get(0) + 1);
+                        //Logic; "set it to 1 so it knows to not overwrite since it could be still looping"
+                        break planeCheck;
+                        // this'd stop the loop(better if the thing is found early on in the list)
                     }
                     break;
-                case 4://amount of planes in an airline 
-                    
+                case 4://amount of planes in an airline (Incomplete)
+
                     if (p.getpCompany().equalsIgnoreCase(compName)) {
-                        openInt.set(0, openInt.get(0)+1);
+                        openInt.set(0, openInt.get(0) + 1);
                         openString = compName + " has " + openInt.get(0) + " planes in the air.";
                     }
                     break;
+                case 5://Find last plane for a given company
+                    TreeMap<Integer, Plane> revMap = (TreeMap<Integer, Plane>) planeList.descendingMap();
+                    for (Plane p1 : revMap.values()) {
+                        if (openInt.get(0) != 1 && p1.getpCompany().equalsIgnoreCase(compName)) {
+                            openString = p1.toString();
+                            //found the plane in question, so exit out of all of it using this cool name block break thing.
+                            break planeCheck;
+                        }
+                        
+                    }
                 default:
                     break;
             }
