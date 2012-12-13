@@ -67,15 +67,21 @@ public class mainApp {
 
         p1 = addPlane("Flyer", 2500, "Saints Air", 200, 12, 2012, 12, 25, 14, cList);
         incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
-         
 
-        for (Plane p : incomingPlanes.values()) {
-            System.out.println(p.toString());
-        }
+
+        //for (Plane p : incomingPlanes.values()) {
+        //  System.out.println(p.toString());
+        //}
 
         System.out.println("///////////////////////////////////////////////////////////////");
+        //create GUI here
 
-        pDetails(4, incomingPlanes, null);
+        System.out.println(/*
+                 * do some kerazy cracka stuff here
+                 */);
+
+        //end GUI
+        pDetails(1, incomingPlanes, "Dead Air");
     }
 
     public Plane addPlane(String name, int fuel, String pCompany, int fuelConsumption, int passengers, int year, int month, int day, int hour, HashMap<String, Plane> rList) {
@@ -98,6 +104,7 @@ public class mainApp {
         LinkedList<String> companies = new LinkedList<String>();
         ArrayList<String> openString = new ArrayList<String>();
         openString.add("");
+        TreeMap<Integer, Plane> arrangedList = new TreeMap<Integer, Plane>();
         planeCheck:
         for (Plane p : planeList.values()) {
             switch (type) {
@@ -118,10 +125,8 @@ public class mainApp {
                         //and since this if is nested)
                     }
                     break;
-                case 4://amount of planes in an airline (Incomplete)
+                case 4://amount of planes in an airline
                     //loop through the company, then through planes for each, then next company
-
-
                     for (int i = 0; i < companies.size(); i++) {
 
                         if (companies.get(i).equalsIgnoreCase(p.getpCompany())) {
@@ -140,14 +145,31 @@ public class mainApp {
                         }
 
                     }
+                case 6://Print by specified airline, by overdue
+                    
+                    arrangedList.put((p.getpCompany().equalsIgnoreCase(compName)) ? p.isOverdue(p.getArrivalTime()) : 0, p);
+                    openInt++;
+                    
+                    //Youve reached the last time the company exists, arrangedList now gets stuck into openString
+                    
+                    
                 default:
                     break;
             }
         }
+        //if case 6 is run
+        if(!arrangedList.isEmpty()){
+            openString.set(0, arrangedList.get(0).getName());
+            for(int i = 1; i < arrangedList.size();i++){
+                openString.add(arrangedList.get(i).getName());
+            }
+        }
+        //If case 4 is run
         if (!companies.isEmpty()) {
             //Runs the mostCompanies method after finding out a list of company Names
             openString.set(0, theMostPlanes(companies, planeList));
         }
+        //If openString is given any input
         if (!openString.isEmpty()) {
             for (int i = 0; i < openString.size(); i++) {
                 System.out.println(openString);

@@ -107,7 +107,10 @@ public class Plane implements Comparable {
 
     @Override
     public String toString() {
-        return "Plane{" + "name=" + name + ", NumPlanes=" + NumPlanes + ", serial=" + serial + ", pCompany=" + pCompany + ", fuel=" + fuel + ", fuelConsumption=" + fuelConsumption + ", timeLimitBeforeLand=" + timeLimitBeforeLand + ", passengers=" + passengers + ", arrivalTime=" + MyDate.getDateAsString(arrivalTime, MyDate.FORMATTYPE.YMD_HMS_FRMT_TYPE) + ", Overdue= " + isOverdue(this.getArrivalTime())+ '}';
+        return "name=" + name + "\n NumPlanes=" + NumPlanes + "\n serial=" + serial + "\n pCompany=" + pCompany + "\n fuel=" + fuel + "\n fuelConsumption=" + fuelConsumption 
+                + "\n timeLimitBeforeLand=" + timeLimitBeforeLand + "\n passengers=" + passengers + "\n arrivalTime=" 
+                + MyDate.getDateAsString(arrivalTime, MyDate.FORMATTYPE.YMD_HMS_FRMT_TYPE) + "\n Overdue= " + isOverdue(this.getArrivalTime())
+                +"\n======================================================\n";
     }
 
     @Override
