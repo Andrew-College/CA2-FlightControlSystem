@@ -1,3 +1,4 @@
+
 import java.lang.Math;
 import java.util.*;
 
@@ -43,7 +44,7 @@ public class mainApp {
 
         //adds a plane and checks if it exists, if so, remove this adjust plane with the found plane
 
-        Plane p1 = addPlane("AerDrop212", 2000, "JK Airtrains", 50, 12, 2012, 12, 25, 12, cList);
+        Plane p1 = addPlane("AerDrop212", 2000, "Dead Air", 50, 12, 2012, 12, 25, 12, cList);
         incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
 
 
@@ -51,7 +52,7 @@ public class mainApp {
         incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
 
 
-        p1 = addPlane("shortTripV456", 5000, "JK Airtrains", 50, 12, 2012, 12, 25, 13, cList);
+        p1 = addPlane("shortTripV56", 5000, "Dead Air", 50, 12, 2012, 12, 25, 13, cList);
         incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
 
 
@@ -67,7 +68,7 @@ public class mainApp {
 
         System.out.println("///////////////////////////////////////////////////////////////");
 
-        pDetails(3, incomingPlanes, "JK Airtrains");
+        pDetails(4, incomingPlanes, null);
     }
 
     public Plane addPlane(String name, int fuel, String pCompany, int fuelConsumption, int passengers, int year, int month, int day, int hour, HashMap<String, Plane> rList) {
@@ -86,51 +87,96 @@ public class mainApp {
 
     public void pDetails(int type, TreeMap<Integer, Plane> planeList, String compName) {
 
-        ArrayList<Integer> openInt = new ArrayList<Integer>();
-        openInt.add(0);
-        String openString = "";
+        int openInt = 0;
+        LinkedList<String> companies = new LinkedList<String>();
+        ArrayList<String> openString = new ArrayList<String>();
+        openString.add("");
         planeCheck:
         for (Plane p : planeList.values()) {
             switch (type) {
                 case 1://all planes, one airline
-                    System.out.print((p.getpCompany().equalsIgnoreCase(compName)) ? p.toString() + "\n" : "");
+                    openString.add((p.getpCompany().equalsIgnoreCase(compName)) ? p.toString() + "\n" : "");
                     break;
                 case 2://all planes passengers
-                    openInt.set(0, openInt.get(0) + p.getPassengers());
-                    openString = "There are " + openInt + " passengers in the air.";
+                    openInt += p.getPassengers();
+                    openString.set(0, "There are " + openInt + " passengers in the air.");
                     break;
                 case 3://next plane for one airline
-                    if (openInt.get(0) != 1 && p.getpCompany().equalsIgnoreCase(compName)) {
-                        openString = p.toString();
+                    if (p.getpCompany().equalsIgnoreCase(compName)) {
+                        openString.set(0, p.toString());
                         //openInt.set(0, openInt.get(0) + 1);
                         //Logic; "set it to 1 so it knows to not overwrite since it could be still looping"
                         break planeCheck;
-                        // this'd stop the loop(better if the thing is found early on in the list)
+                        // this'd stop the loop(better if the thing is found early on in the list 
+                        //and since this if is nested)
                     }
                     break;
                 case 4://amount of planes in an airline (Incomplete)
+                    //loop through the company, then through planes for each, then next company
 
-                    if (p.getpCompany().equalsIgnoreCase(compName)) {
-                        openInt.set(0, openInt.get(0) + 1);
-                        openString = compName + " has " + openInt.get(0) + " planes in the air.";
+
+                    for (int i = 0; i < companies.size(); i++) {
+                        
+                        if (companies.get(i).equalsIgnoreCase(p.getpCompany())) {
+                            companies.remove(i);
+                        }
                     }
+                    companies.add(p.getpCompany());
                     break;
                 case 5://Find last plane for a given company
                     TreeMap<Integer, Plane> revMap = (TreeMap<Integer, Plane>) planeList.descendingMap();
                     for (Plane p1 : revMap.values()) {
-                        if (openInt.get(0) != 1 && p1.getpCompany().equalsIgnoreCase(compName)) {
-                            openString = p1.toString();
+                        if (p1.getpCompany().equalsIgnoreCase(compName)) {
+                            openString.set(0, p.toString());
                             //found the plane in question, so exit out of all of it using this cool name block break thing.
                             break planeCheck;
                         }
-                        
+
                     }
                 default:
                     break;
             }
         }
-        if (openString.length() > 0) {
-            System.out.println(openString);
+        if (!companies.isEmpty()) {
+            //Runs the mostCompanies method after finding out a list of company Names
+            openString.set(0, theMostPlanes(companies, planeList));
         }
+        if (!openString.isEmpty()) {
+            for (int i = 0; i < openString.size(); i++) {
+                System.out.println(openString);
+            }
+        }
+    }
+
+    public static String theMostPlanes(LinkedList<String> companyList, TreeMap<Integer, Plane> pList) {
+        int[] amountOfPlanes = new int[companyList.size()];
+        String result = "";
+
+        //fill out who has what planes
+        for (Plane p : pList.values()) {
+            for (int i = 0; i < amountOfPlanes.length; i++) {
+                if (companyList.get(i).equalsIgnoreCase(p.getpCompany())) {
+                    //Goes through each plane, checks if it matches one of companyLists, if so increments relevant "amountOfPlanes"
+                    amountOfPlanes[i]++;
+                }
+            }
+        }
+        
+        //who has most
+        for(int i = 1; i < amountOfPlanes.length; i++){
+            
+            if(amountOfPlanes[i]>amountOfPlanes[i-1]){
+                System.out.println(companyList.get(i) +" has the most, with " + amountOfPlanes[i] + " planes incoming");
+                result = companyList.get(i) +" has the most, with " + amountOfPlanes[i] + " planes incoming";
+            }else if(amountOfPlanes[i]==amountOfPlanes[i-1]){
+                //todo; what if multiple companies have the same number?
+                //please god I dont have to bother with substrings................
+            }else{
+                result = companyList.get(i-1) +" has the most, with " + amountOfPlanes[i-1] + " planes incoming";
+            }
+        }
+        
+        return result;
+
     }
 }

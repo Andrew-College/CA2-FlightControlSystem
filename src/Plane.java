@@ -1,5 +1,8 @@
+
 import java.util.Calendar;
 import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class Plane implements Comparable {
 
@@ -106,18 +109,15 @@ public class Plane implements Comparable {
         return "Plane{" + "name=" + name + ", NumPlanes=" + NumPlanes + ", serial=" + serial + ", pCompany=" + pCompany + ", fuel=" + fuel + ", fuelConsumption=" + fuelConsumption + ", timeLimitBeforeLand=" + timeLimitBeforeLand + ", passengers=" + passengers + ", arrivalTime=" + arrivalTime + ", departTime=" + departTime + '}';
     }
 
-    
-    
     @Override
     public int compareTo(Object o) {
-
-        Plane p = (Plane) (o);
-        Integer p1 = (Integer) this.gettimeLimitBeforeLand();
-
-        return p1.compareTo(p.gettimeLimitBeforeLand());
+        if (o != null && o instanceof Plane) {
+            Plane p = (Plane) (o);
+            Integer p1 = (Integer) this.gettimeLimitBeforeLand();
+            return p1.compareTo(p.gettimeLimitBeforeLand());
+        }
+        return -1;
     }
-    
-    
 }
 
 
