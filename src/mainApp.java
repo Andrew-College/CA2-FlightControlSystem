@@ -62,6 +62,13 @@ public class mainApp {
         p1 = addPlane("shortTripV45", 3000, "Dead Air", 100, 20, 2012, 12, 25, 14, cList);
         incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
 
+        p1 = addPlane("FlyAway", 1000, "Saints Air", 150, 50, 2012, 12, 25, 14, cList);
+        incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
+
+        p1 = addPlane("Flyer", 2500, "Saints Air", 200, 12, 2012, 12, 25, 14, cList);
+        incomingPlanes.put(p1.gettimeLimitBeforeLand(), p1);
+         
+
         for (Plane p : incomingPlanes.values()) {
             System.out.println(p.toString());
         }
@@ -116,7 +123,7 @@ public class mainApp {
 
 
                     for (int i = 0; i < companies.size(); i++) {
-                        
+
                         if (companies.get(i).equalsIgnoreCase(p.getpCompany())) {
                             companies.remove(i);
                         }
@@ -161,21 +168,21 @@ public class mainApp {
                 }
             }
         }
-        
+
         //who has most
-        for(int i = 1; i < amountOfPlanes.length; i++){
-            
-            if(amountOfPlanes[i]>amountOfPlanes[i-1]){
-                System.out.println(companyList.get(i) +" has the most, with " + amountOfPlanes[i] + " planes incoming");
-                result = companyList.get(i) +" has the most, with " + amountOfPlanes[i] + " planes incoming";
-            }else if(amountOfPlanes[i]==amountOfPlanes[i-1]){
+        for (int i = 1; i < amountOfPlanes.length; i++) {
+
+            if (amountOfPlanes[i] > amountOfPlanes[i - 1]) {
+                System.out.println(companyList.get(i) + " has the most, with " + amountOfPlanes[i] + " planes incoming");
+                result = companyList.get(i) + " has the most, with " + amountOfPlanes[i] + " planes incoming";
+            } else if (amountOfPlanes[i] == amountOfPlanes[i - 1]) {
                 //todo; what if multiple companies have the same number?
                 //please god I dont have to bother with substrings................
-            }else{
-                result = companyList.get(i-1) +" has the most, with " + amountOfPlanes[i-1] + " planes incoming";
+            } else {
+                result = companyList.get(i - 1) + " has the most, with " + amountOfPlanes[i - 1] + " planes incoming";
             }
         }
-        
+
         return result;
 
     }

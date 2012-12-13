@@ -1,13 +1,16 @@
 
+
+
 import java.util.Calendar;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import MrNiallsWork.MyDate;
 
 public class Plane implements Comparable {
 
     private String name;
-    private int NumPlanes;
+    private static int NumPlanes;
     private int serial;
     private String pCompany;
     private int fuel;
@@ -15,7 +18,6 @@ public class Plane implements Comparable {
     private int timeLimitBeforeLand;
     private int passengers;
     private Calendar arrivalTime;
-    private Calendar departTime;
 
     public Plane(String name, int fuel, String pCompany, int fuelConsumption, int passengers) {
         this.name = name;
@@ -26,7 +28,6 @@ public class Plane implements Comparable {
 
         this.passengers = passengers;
         this.arrivalTime = Calendar.getInstance();
-        this.departTime = Calendar.getInstance();
         this.timeLimitBeforeLand = gettimeLimitBeforeLand();
         NumPlanes++;
     }
@@ -106,7 +107,7 @@ public class Plane implements Comparable {
 
     @Override
     public String toString() {
-        return "Plane{" + "name=" + name + ", NumPlanes=" + NumPlanes + ", serial=" + serial + ", pCompany=" + pCompany + ", fuel=" + fuel + ", fuelConsumption=" + fuelConsumption + ", timeLimitBeforeLand=" + timeLimitBeforeLand + ", passengers=" + passengers + ", arrivalTime=" + arrivalTime + ", departTime=" + departTime + '}';
+        return "Plane{" + "name=" + name + ", NumPlanes=" + NumPlanes + ", serial=" + serial + ", pCompany=" + pCompany + ", fuel=" + fuel + ", fuelConsumption=" + fuelConsumption + ", timeLimitBeforeLand=" + timeLimitBeforeLand + ", passengers=" + passengers + ", arrivalTime=" + MyDate.getDateAsString(arrivalTime, MyDate.FORMATTYPE.YMD_HMS_FRMT_TYPE) + ", Overdue= " + isOverdue(this.getArrivalTime())+ '}';
     }
 
     @Override
@@ -118,7 +119,19 @@ public class Plane implements Comparable {
         }
         return -1;
     }
+
+    public int isOverdue(Calendar arriv) {
+        long now = Calendar.getInstance().getTimeInMillis();
+        
+        if(arriv.getTimeInMillis() == now){
+            return 0;
+        }
+        else if(arriv.getTimeInMillis() > now){
+            return (int)(arriv.getTimeInMillis()-now)/60000;
+        }
+        else
+        {
+            return (int)(arriv.getTimeInMillis() - now)/60000*-1;
+        }
+    }
 }
-
-
-//CompareTo method to be done here. (Compares the remaining fuel left for the treemap?)

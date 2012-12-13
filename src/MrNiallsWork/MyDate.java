@@ -1,4 +1,4 @@
-package MrNeilsWork;
+package MrNiallsWork;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

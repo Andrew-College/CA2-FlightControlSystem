@@ -1,4 +1,4 @@
-package MrNeilsWork;
+package MrNiallsWork;
 
 import java.util.ArrayList;
 import java.util.Collections;
