@@ -1,13 +1,12 @@
 
-
-
 import java.util.Calendar;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import MrNiallsWork.MyDate;
+import java.io.Serializable;
 
-public class Plane implements Comparable {
+public class Plane implements Comparable, Serializable {
 
     private String name;
     private static int NumPlanes;
@@ -107,10 +106,13 @@ public class Plane implements Comparable {
 
     @Override
     public String toString() {
-        return "name=" + name + "\n NumPlanes=" + NumPlanes + "\n serial=" + serial + "\n pCompany=" + pCompany + "\n fuel=" + fuel + "\n fuelConsumption=" + fuelConsumption 
-                + "\n timeLimitBeforeLand=" + timeLimitBeforeLand + "\n passengers=" + passengers + "\n arrivalTime=" 
-                + MyDate.getDateAsString(arrivalTime, MyDate.FORMATTYPE.YMD_HMS_FRMT_TYPE) + "\n Overdue= " + isOverdue(this.getArrivalTime())
-                +"\n======================================================\n";
+        return "name=" + name + "\n NumPlanes=" + NumPlanes + "\n serial=" + serial + "\n pCompany="
+                + pCompany + "\n fuel=" + fuel + "\n fuelConsumption=" + fuelConsumption
+                + "\n timeLimitBeforeLand=" + timeLimitBeforeLand + "\n passengers="
+                + passengers + "\n arrivalTime="
+                + MyDate.getDateAsString(arrivalTime, MyDate.FORMATTYPE.YMD_HMS_FRMT_TYPE)
+                + "\n Overdue= " + isOverdue(this.getArrivalTime())
+                + "\n======================================================\n";
     }
 
     @Override
@@ -125,16 +127,13 @@ public class Plane implements Comparable {
 
     public int isOverdue(Calendar arriv) {
         long now = Calendar.getInstance().getTimeInMillis();
-        
-        if(arriv.getTimeInMillis() == now){
+
+        if (arriv.getTimeInMillis() == now) {
             return 0;
-        }
-        else if(arriv.getTimeInMillis() > now){
-            return (int)(arriv.getTimeInMillis()-now)/60000;
-        }
-        else
-        {
-            return (int)(arriv.getTimeInMillis() - now)/60000*-1;
+        } else if (arriv.getTimeInMillis() > now) {
+            return (int) (arriv.getTimeInMillis() - now) / 60000;
+        } else {
+            return (int) (arriv.getTimeInMillis() - now) / 60000;
         }
     }
 }
